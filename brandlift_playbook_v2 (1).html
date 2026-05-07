@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Lift Playbook</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f4f6fb; color: #1a1a2e; line-height: 1.6; }
+  .page { max-width: 800px; margin: 0 auto; padding: 2rem 2rem 3rem; }
+
+  .hero { background: linear-gradient(135deg, #1A2E6F 0%, #0e1d4a 100%); border-radius: 16px; padding: 2.5rem 2rem 2rem; margin-bottom: 1.5rem; }
+  .hero-tag { display: inline-block; background: rgba(0,174,239,0.2); color: #7dd3f8; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(0,174,239,0.4); margin-bottom: 0.75rem; text-transform: uppercase; }
+  .hero h1 { font-size: 34px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 0.5rem; }
+  .hero p { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.6; max-width: 480px; }
+  .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 1.5rem; }
+  .stat { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; padding: 0.9rem 1rem; }
+  .stat-num { font-size: 26px; font-weight: 700; color: #00AEEF; }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+  .section { margin-bottom: 1.75rem; }
+  .section-title { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e8f0; }
+
+  .metrics-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; }
+  .metric-card { background: #fff; border: 1px solid #e5e8f0; border-radius: 10px; padding: 0.85rem; }
+  .metric-name { font-size: 12px; font-weight: 700; color: #1A2E6F; margin-bottom: 3px; }
+  .metric-desc { font-size: 11px; color: #666; line-height: 1.4; }
+
+  .flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0.75rem 0; }
+  .flow-step { background: #e8f4fb; border-radius: 8px; padding: 7px 14px; font-size: 12px; color: #185fa5; font-weight: 700; white-space: nowrap; }
+  .flow-arrow { font-size: 18px; color: #aaa; }
+  .flow-note { font-size: 12px; color: #666; line-height: 1.6; margin-top: 6px; }
+
+  .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .rule { border-radius: 10px; padding: 0.9rem 1rem; }
+  .rule-yes { background: #eaf3de; border-left: 4px solid #639922; }
+  .rule-no { background: #fcebeb; border-left: 4px solid #e24b4a; }
+  .rule-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 5px; }
+  .rule-yes .rule-label { color: #3b6d11; }
+  .rule-no .rule-label { color: #a32d2d; }
+  .rule p { font-size: 12px; color: #333; line-height: 1.55; }
+
+  .checklist { display: flex; flex-direction: column; gap: 7px; }
+  .check-row { display: flex; align-items: flex-start; gap: 10px; padding: 0.7rem 0.9rem; background: #f7f8fc; border-radius: 10px; border: 1px solid #e5e8f0; }
+  .check-badge { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #eaf3de; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #3b6d11; font-weight: 700; margin-top: 1px; }
+  .check-content { flex: 1; }
+  .check-title { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+  .check-desc { font-size: 11px; color: #666; margin-top: 1px; }
+  .pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; margin-top: 3px; }
+  .pill-blue { background: #e8f4fb; color: #185fa5; }
+  .pill-green { background: #eaf3de; color: #3b6d11; }
+  .pill-red { background: #fcebeb; color: #a32d2d; }
+  .pill-amber { background: #faeeda; color: #854f0b; }
+
+  .pitch-box { background: #1A2E6F; border-radius: 14px; padding: 1.5rem 1.75rem; }
+  .pitch-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #00AEEF; font-weight: 700; margin-bottom: 0.6rem; }
+  .pitch-box p { font-size: 15px; font-style: italic; color: rgba(255,255,255,0.92); line-height: 1.7; }
+
+  .objection-list { display: flex; flex-direction: column; gap: 8px; }
+  .obj-item { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid #e5e8f0; border-radius: 10px; overflow: hidden; }
+  .obj-q { background: #f7f8fc; padding: 0.75rem 0.9rem; font-size: 12px; color: #555; font-style: italic; line-height: 1.55; border-right: 1px solid #e5e8f0; }
+  .obj-a { background: #fff; padding: 0.75rem 0.9rem; font-size: 12px; color: #1a1a2e; line-height: 1.55; }
+
+  .faq-list { display: flex; flex-direction: column; gap: 7px; }
+  .faq-item { background: #fff; border: 1px solid #e5e8f0; border-radius: 10px; overflow: hidden; }
+  .faq-q { font-size: 13px; font-weight: 700; color: #1a1a2e; padding: 0.85rem 1rem; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .faq-a { font-size: 12px; color: #555; line-height: 1.65; padding: 0 1rem 0.85rem; }
+
+  .survey-grid { display: flex; flex-direction: column; gap: 12px; }
+  .survey-card { background: #fff; border: 1px solid #e5e8f0; border-radius: 12px; overflow: hidden; }
+  .survey-header { display: flex; align-items: center; gap: 10px; padding: 0.8rem 1rem 0.65rem; border-bottom: 1px solid #e5e8f0; background: #f7f8fc; }
+  .survey-num { width: 24px; height: 24px; border-radius: 50%; background: #1A2E6F; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .survey-meta { flex: 1; }
+  .survey-type { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.06em; }
+  .survey-metric { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+  .survey-body { padding: 0.9rem 1rem; }
+  .survey-question { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 0.65rem; line-height: 1.45; }
+  .survey-options { display: flex; flex-wrap: wrap; gap: 6px; }
+  .survey-opt { font-size: 11px; padding: 5px 12px; border-radius: 20px; border: 1px solid #dde2ee; color: #555; background: #f7f8fc; }
+  .survey-opt-open { font-size: 11px; color: #888; font-style: italic; padding: 7px 12px; border-radius: 8px; border: 1px dashed #ccc; background: #f7f8fc; width: 100%; }
+  .survey-tip { font-size: 11px; color: #185fa5; margin-top: 10px; padding-top: 10px; border-top: 1px solid #e5e8f0; }
+
+  .footer { text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e8f0; font-size: 12px; color: #aaa; }
+  .footer span { color: #00AEEF; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-tag">Sales Playbook</div>
+    <h1>Brand Lift</h1>
+    <p>Demuestra el impacto real de cada campaña. Sin coste adicional para el cliente.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">+37.2%</div><div class="stat-label">Ad Recall (caso Spotify)</div></div>
+      <div class="stat"><div class="stat-num">+23.4%</div><div class="stat-label">Atribución de marca</div></div>
+      <div class="stat"><div class="stat-num">$10K+</div><div class="stat-label">Inversión mínima</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">¿Qué mide?</div>
+    <div class="metrics-grid">
+      <div class="metric-card"><div class="metric-name">Ad Recall</div><div class="metric-desc">¿Recuerda haber visto la publicidad?</div></div>
+      <div class="metric-card"><div class="metric-name">Atribución</div><div class="metric-desc">¿Asocia el anuncio con la marca correcta?</div></div>
+      <div class="metric-card"><div class="metric-name">Awareness</div><div class="metric-desc">¿Conoce o ha oído hablar de la marca?</div></div>
+      <div class="metric-card"><div class="metric-name">Consideración</div><div class="metric-desc">¿La consideraría al momento de comprar?</div></div>
+      <div class="metric-card"><div class="metric-name">Imagen</div><div class="metric-desc">¿Qué percepción tiene de la marca?</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Cómo funciona</div>
+    <div class="flow">
+      <div class="flow-step">Campaña activa</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Recogida de MIDs</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Encuesta en display</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Análisis + reporte</div>
+    </div>
+    <div class="flow-note">Las audiencias se construyen con datos de <strong>movilidad física</strong> — visitas reales a lugares — no navegación web.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Ejemplos de preguntas de encuesta al consumidor</div>
+    <div class="survey-grid">
+      <div class="survey-card">
+        <div class="survey-header">
+          <div class="survey-num">1</div>
+          <div class="survey-meta"><div class="survey-type">Ad Recall · Opción múltiple</div><div class="survey-metric">Recuerdo espontáneo</div></div>
+          <span class="pill pill-blue">Genérica</span>
+        </div>
+        <div class="survey-body">
+          <div class="survey-question">En los últimos días, ¿has visto publicidad de alguna de estas marcas?</div>
+          <div class="survey-options">
+            <div class="survey-opt">Marca A</div><div class="survey-opt">Marca B</div><div class="survey-opt">Marca C (cliente)</div><div class="survey-opt">Ninguna</div>
+          </div>
+          <div class="survey-tip">La marca del cliente se incluye entre otras para evitar sesgo. Si la seleccionan, el recuerdo es genuino.</div>
+        </div>
+      </div>
+      <div class="survey-card">
+        <div class="survey-header">
+          <div class="survey-num">2</div>
+          <div class="survey-meta"><div class="survey-type">Atribución · Opción múltiple</div><div class="survey-metric">Asociación marca–anuncio</div></div>
+          <span class="pill pill-blue">Genérica</span>
+        </div>
+        <div class="survey-body">
+          <div class="survey-question">¿De qué marca crees que era el anuncio que viste recientemente sobre [categoría del producto]?</div>
+          <div class="survey-options">
+            <div class="survey-opt">Marca A</div><div class="survey-opt">Marca B</div><div class="survey-opt">Marca C (cliente)</div><div class="survey-opt">No lo recuerdo</div>
+          </div>
+          <div class="survey-tip">Mide si el mensaje creativo conecta correctamente con la marca. Bajo porcentaje = problema de branding en el anuncio.</div>
+        </div>
+      </div>
+      <div class="survey-card">
+        <div class="survey-header">
+          <div class="survey-num">3</div>
+          <div class="survey-meta"><div class="survey-type">Consideración · Escala Likert</div><div class="survey-metric">Intención de compra</div></div>
+          <span class="pill pill-green">Personalizable</span>
+        </div>
+        <div class="survey-body">
+          <div class="survey-question">¿Qué probabilidad hay de que consideres [marca del cliente] la próxima vez que necesites [categoría]?</div>
+          <div class="survey-options">
+            <div class="survey-opt">Muy probable</div><div class="survey-opt">Probable</div><div class="survey-opt">Neutral</div><div class="survey-opt">Poco probable</div><div class="survey-opt">Nada probable</div>
+          </div>
+          <div class="survey-tip">Ideal para campañas de lanzamiento. Se adapta al sector: "contratar", "visitar", "descargar".</div>
+        </div>
+      </div>
+      <div class="survey-card">
+        <div class="survey-header">
+          <div class="survey-num">4</div>
+          <div class="survey-meta"><div class="survey-type">Imagen de marca · Respuesta abierta</div><div class="survey-metric">Percepción cualitativa</div></div>
+          <span class="pill pill-amber">Opcional</span>
+        </div>
+        <div class="survey-body">
+          <div class="survey-question">¿Qué tres palabras usarías para describir a [marca del cliente]?</div>
+          <div class="survey-options"><div class="survey-opt-open">Respuesta libre del consumidor...</div></div>
+          <div class="survey-tip">Aporta datos cualitativos sobre posicionamiento. Combinada con las anteriores, da una visión 360° del impacto.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Cuándo ofrecerlo</div>
+    <div class="rules">
+      <div class="rule rule-yes"><div class="rule-label">Ofrecer siempre</div><p>Campañas ≥ $10,000 USD · Marcas grandes · DOOH y CTV · Clientes que piden "pruebas" · Renovaciones de presupuesto</p></div>
+      <div class="rule rule-no"><div class="rule-label">No aplica</div><p>Presupuesto &lt; $10K · Compra vía programmatic desk externo (PNP) · Campañas cortas (&lt; 4 semanas)</p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Requisitos operativos</div>
+    <div class="checklist">
+      <div class="check-row"><div class="check-badge">✓</div><div class="check-content"><div class="check-title">300 respuestas mínimas</div><div class="check-desc">Necesarias para extrapolación estadística válida</div></div><span class="pill pill-blue">Técnico</span></div>
+      <div class="check-row"><div class="check-badge">✓</div><div class="check-content"><div class="check-title">Máx. 4–5 preguntas por encuesta</div><div class="check-desc">Más preguntas = menor tasa de respuesta</div></div><span class="pill pill-blue">Técnico</span></div>
+      <div class="check-row"><div class="check-badge">✓</div><div class="check-content"><div class="check-title">Activar 1 semana tras el inicio</div><div class="check-desc">En campañas largas, esperar 2–3 meses para muestra más estable</div></div><span class="pill pill-blue">Técnico</span></div>
+      <div class="check-row"><div class="check-badge">✓</div><div class="check-content"><div class="check-title">No brandear la encuesta</div><div class="check-desc">El logo del cliente sesga las respuestas y anula el estudio</div></div><span class="pill pill-red">Crítico</span></div>
+      <div class="check-row"><div class="check-badge">✓</div><div class="check-content"><div class="check-title">Preguntas pactadas con el cliente</div><div class="check-desc">Se pueden hacer abiertas, concatenadas o en árbol de decisión</div></div><span class="pill pill-green">Comercial</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">El pitch</div>
+    <div class="pitch-box">
+      <div class="pitch-label">Frase de apertura recomendada</div>
+      <p>"Con Brand Lift no solo te digo cuántas impresiones tuvo tu campaña — te demuestro cuánto mejoró el recuerdo de tu marca, la intención de compra y la imagen de marca entre las personas que vieron tu publicidad."</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Objeciones frecuentes</div>
+    <div class="objection-list">
+      <div class="obj-item"><div class="obj-q">"Ya mido conversiones, no necesito más métricas"</div><div class="obj-a">Las conversiones miden qué pasó. El Brand Lift mide por qué. Es el complemento estratégico que justifica la inversión ante dirección.</div></div>
+      <div class="obj-item"><div class="obj-q">"¿Para qué sirve el recuerdo si no se traduce en ventas?"</div><div class="obj-a">El recuerdo es el primer paso del funnel. Quienes recuerdan una marca tienen 3x más probabilidad de considerarla en el momento de compra.</div></div>
+      <div class="obj-item"><div class="obj-q">"¿Qué diferencia con un estudio de Nielsen?"</div><div class="obj-a">Nuestras audiencias se construyen con movilidad física real, no paneles de usuarios. Son personas que realmente estuvieron expuestas a tu publicidad.</div></div>
+      <div class="obj-item"><div class="obj-q">"Prefiero esperar resultados antes de comprometerme"</div><div class="obj-a">Se activa desde la primera semana. Te da datos en tiempo real para optimizar la campaña mientras está activa, no solo al final.</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Preguntas frecuentes</div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q">¿Cuánto cuesta para el cliente? <span>▾</span></div><div class="faq-a">Cero. Para campañas de $10,000 USD o más, el Brand Lift se incluye sin coste adicional. Appcelerate asume el coste como parte del servicio premium.</div></div>
+      <div class="faq-item"><div class="faq-q">¿Se puede personalizar la encuesta? <span>▾</span></div><div class="faq-a">Sí. Las preguntas se pactan con el cliente. Se pueden hacer abiertas, de múltiple opción, o en árbol de decisión. El límite recomendado es 4–5 preguntas.</div></div>
+      <div class="faq-item"><div class="faq-q">¿Funciona con cualquier formato de campaña? <span>▾</span></div><div class="faq-a">Sí, siempre que se alcance el presupuesto mínimo. DOOH y CTV requieren más trabajo operativo. Solo aplica a campañas gestionadas directamente por Appcelerate, no a compras vía desk externo (PNP).</div></div>
+      <div class="faq-item"><div class="faq-q">¿Cómo garantizamos las 300 respuestas? <span>▾</span></div><div class="faq-a">No hay garantía absoluta, pero se puede mejorar la tasa con: presupuesto suficiente, pocas preguntas (máx. 5) y opcionalmente un incentivo para el encuestado.</div></div>
+      <div class="faq-item"><div class="faq-q">¿Hay un ejemplo del reporte para mostrar al cliente? <span>▾</span></div><div class="faq-a">Sí. Hay un reporte genérico basado en el esquema de Spotify (con datos ficticios) y el caso real del supermercado DIA. Pídelos a Antonio Álvarez antes de tu reunión.</div></div>
+    </div>
+  </div>
+
+  <div class="footer"><span>Appcelerate</span> · Brand Lift Sales Playbook · Uso interno</div>
+</div>
+</body>
+</html>
